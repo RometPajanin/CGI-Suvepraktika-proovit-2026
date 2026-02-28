@@ -1,5 +1,6 @@
 package com.example.cgisuvepraktikaproovitoo2026;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
@@ -7,17 +8,21 @@ import jakarta.persistence.Entity;
 public class Table extends BaseEntity {
     private int seats;
     private String zone;
-    private boolean isNearWindow;
-    private boolean isPrivate;
+
+    @Column(name = "is_near_window")
+    private boolean nearWindow;
+
+    @Column(name = "is_private")
+    private boolean privateTable;
 
     public Table() {
     }
 
-    public Table(int seats, String zone, boolean isNearWindow, boolean isPrivate) {
+    public Table(int seats, String zone, boolean nearWindow, boolean privateTable) {
         this.seats = seats;
         this.zone = zone;
-        this.isNearWindow = isNearWindow;
-        this.isPrivate = isPrivate;
+        this.nearWindow = nearWindow;
+        this.privateTable = privateTable;
     }
 
     public int getSeats() {
@@ -37,18 +42,18 @@ public class Table extends BaseEntity {
     }
 
     public boolean isNearWindow() {
-        return isNearWindow;
+        return nearWindow;
     }
 
     public void setNearWindow(boolean nearWindow) {
-        isNearWindow = nearWindow;
+        this.nearWindow = nearWindow;
     }
 
-    public boolean isPrivate() {
-        return isPrivate;
+    public boolean isPrivateTable() {
+        return privateTable;
     }
 
-    public void setPrivate(boolean aPrivate) {
-        isPrivate = aPrivate;
+    public void setPrivateTable(boolean privateTable) {
+        this.privateTable = privateTable;
     }
 }
