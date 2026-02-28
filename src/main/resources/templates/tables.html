@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Add a new table</h1>
+<form id="add-form" th:action="@{/create-table}" th:object="${table}" method="post">
+    <input type="hidden" id="id" name="id" th:field="*{id}">
+    <label for="seats">Seats:</label>
+    <input type="number" id="seats" name="seats" th:field="*{seats}" required>
+    <br>
+    <label for="zone">Zone:</label>
+    <input type="text" id="zone" name="zone" th:field="*{zone}" required>
+    <br>
+    <label for="nearWindow">Near Window:</label>
+    <input type="checkbox" id="nearWindow" name="nearWindow" th:field="*{nearWindow}">
+    <br>
+    <label for="privateTable">Private Table:</label>
+    <input type="checkbox" id="privateTable" name="privateTable" th:field="*{privateTable}">
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+<h1>All tables</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Seats</th>
+        <th>Zone</th>
+        <th>Near Window</th>
+        <th>Private Table</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="table : ${tables}">
+        <td th:text="${table.seats}"></td>
+        <td th:text="${table.zone}"></td>
+        <td th:text="${table.nearWindow}"></td>
+        <td th:text="${table.privateTable}"></td>
+        <td>
+            <button th:onclick="editTable([[${table.id}]], [[${table.seats}]], [[${table.zone}]], [[${table.nearWindow}]], [[${table.privateTable}]])">Edit</button>
+            <form th:action="@{/delete-table/{id}(id=${table.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function editTable(id, seats, zone, nearWindow, privateTable) {
+        document.getElementById('id').value = id;
+        document.getElementById('seats').value = seats;
+        document.getElementById('zone').value = zone;
+        document.getElementById('nearWindow').checked = nearWindow;
+        document.getElementById('privateTable').checked = privateTable;
+        document.getElementById('add-form').scrollIntoView();
+    }
+</script>
+
+</body>
+</html>

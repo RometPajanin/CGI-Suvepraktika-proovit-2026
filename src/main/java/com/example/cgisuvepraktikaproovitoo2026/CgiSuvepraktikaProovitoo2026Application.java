@@ -9,6 +9,7 @@ import org.springframework.core.env.Environment;
 @SpringBootApplication
 public class CgiSuvepraktikaProovitoo2026Application {
 
+
     public static void main(String[] args) {
         SpringApplication.run(CgiSuvepraktikaProovitoo2026Application.class, args);
     }
